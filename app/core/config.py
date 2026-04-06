@@ -26,5 +26,13 @@ class Settings(BaseSettings):
             return self.database_url.replace("postgresql://", "postgresql+psycopg://", 1)
         return self.database_url
 
+    @property
+    def effective_salesforce_redirect_uri(self) -> str:
+        if self.salesforce_redirect_uri and "localhost" not in self.salesforce_redirect_uri:
+            return self.salesforce_redirect_uri
+        if self.api_base_url:
+            return f"{self.api_base_url.rstrip('/')}/api/auth/callback"
+        return self.salesforce_redirect_uri
+
 
 settings = Settings()

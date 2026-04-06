@@ -39,7 +39,7 @@ async def get_login_url(db: Session = Depends(get_db)) -> dict[str, str]:
         {
             "response_type": "code",
             "client_id": settings.salesforce_client_id,
-            "redirect_uri": settings.salesforce_redirect_uri,
+            "redirect_uri": settings.effective_salesforce_redirect_uri,
             "scope": "api refresh_token id",
             "state": session.id,
             "code_challenge": challenge,
@@ -120,7 +120,7 @@ async def salesforce_callback(
         "grant_type": "authorization_code",
         "client_id": settings.salesforce_client_id,
         "client_secret": settings.salesforce_client_secret,
-        "redirect_uri": settings.salesforce_redirect_uri,
+        "redirect_uri": settings.effective_salesforce_redirect_uri,
         "code": code,
         "code_verifier": sf_pkce_verifier,
     }
