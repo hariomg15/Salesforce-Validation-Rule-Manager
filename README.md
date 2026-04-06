@@ -55,6 +55,12 @@ SALESFORCE_REDIRECT_URI=http://localhost:8000/api/auth/callback
 SALESFORCE_LOGIN_URL=https://login.salesforce.com
 ```
 
+For the frontend, create `frontend/.env` when running locally:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+
 ### 2. Start PostgreSQL
 
 Create a database named `cv_assignment`.
@@ -86,3 +92,4 @@ npm run dev
 - The local session button is available for development and UI walkthroughs without live Salesforce authentication.
 - Real Salesforce operations require valid OAuth credentials and an accessible PostgreSQL instance.
 - Frontend production build has been verified successfully with `npm run build`.
+- For deployment, set `FRONTEND_ORIGIN` on the backend to the Vercel URL and `VITE_API_BASE_URL` on the frontend to the Railway backend URL.
